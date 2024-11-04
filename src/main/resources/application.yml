@@ -1,0 +1,27 @@
+server:
+  port: 8080
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    urls:
+      - name: Auth Service
+        url: ${service.auth.docs}
+      - name: Chat Service
+        url: ${service.chat.docs}
+      - name: Setting Service
+        url: ${service.setting.docs}
+      - name: Content Service
+        url: ${service.content.docs}
+
+spring:
+  application:
+    name: Gateway-Service
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cache:
+    type: redis
+  config:
+    import: optional:configserver:${CONFIG_SERVER_ENDPOINT:http://localhost:9999}
