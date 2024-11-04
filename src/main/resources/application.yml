@@ -25,3 +25,7 @@ spring:
     type: redis
   config:
     import: optional:configserver:${CONFIG_SERVER_ENDPOINT:http://localhost:9999}
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_ENDPOINT:http://localhost:9999}
+      fail-fast: true

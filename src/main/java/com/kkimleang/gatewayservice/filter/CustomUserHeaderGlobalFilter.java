@@ -3,8 +3,6 @@ package com.kkimleang.gatewayservice.filter;
 
 import com.kkimleang.gatewayservice.dto.Response;
 import com.kkimleang.gatewayservice.dto.UserResponse;
-import io.micrometer.tracing.Tracer;
-import jakarta.ws.rs.ForbiddenException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -15,25 +13,17 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-import java.util.logging.Logger;
-
 @Slf4j
 @Component
 public class CustomUserHeaderGlobalFilter implements GatewayFilter {
     private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     private final WebClient webClient;
-    private final Tracer tracer;
 
     @Value("${service.auth.verify_user_mapping}")
     private String verifyUserMapping;
 
-    public CustomUserHeaderGlobalFilter(
-            WebClient webClient,
-            Tracer tracer
-    ) {
+    public CustomUserHeaderGlobalFilter(WebClient webClient) {
         this.webClient = webClient;
-        this.tracer = tracer;
     }
 
     public boolean isAnonymousPath(String requestPath) {
@@ -65,7 +55,7 @@ public class CustomUserHeaderGlobalFilter implements GatewayFilter {
         if (!isAnonymousPath(exchange.getRequest().getURI().getPath())) {
             String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                return Mono.error(new ForbiddenException("missing or invalid Authorization header"));
+                return Mono.error(new RuntimeException("missing or invalid Authorization header"));
             }
             String token = authHeader.substring(7);
             Mono<Response> userResponse = webClient
