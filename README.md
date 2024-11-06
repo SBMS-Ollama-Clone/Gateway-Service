@@ -5,6 +5,7 @@
 This service is the entry point for the application. It is responsible for routing the incoming requests to the appropriate microservice.
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=SBMS-Ollama-Clone_Gateway-Service)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SBMS-Ollama-Clone_Gateway-Service&metric=alert_status)](https://sonarcloud.io/dashboard?id=SBMS-Ollama-Clone_Gateway-Service)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=SBMS-Ollama-Clone_Gateway-Service&metric=bugs)](https://sonarcloud.io/dashboard?id=SBMS-Ollama-Clone_Gateway-Service)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SBMS-Ollama-Clone_Gateway-Service&metric=coverage)](https://sonarcloud.io/dashboard?id=SBMS-Ollama-Clone_Gateway-Service)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=SBMS-Ollama-Clone_Gateway-Service&metric=ncloc)](https://sonarcloud.io/dashboard?id=SBMS-Ollama-Clone_Gateway-Service)

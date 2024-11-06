@@ -58,6 +58,7 @@ public class CustomUserHeaderGlobalFilter implements GatewayFilter {
                 return Mono.error(new RuntimeException("missing or invalid Authorization header"));
             }
             String token = authHeader.substring(7);
+            log.info("Auth Token: {}", token);
             Mono<Response> userResponse = webClient
                     .get()
                     .uri(verifyUserMapping)
